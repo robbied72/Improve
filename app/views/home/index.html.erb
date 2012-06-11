@@ -1,1 +1,33 @@
-<h1>Welcome to the auth app</h1>
+<div class="page-header">
+	<h1>
+		Recent Activity
+		<small>Below is your latest activity</small>
+	</h1>
+</div>
+<% if user_signed_in? %>
+<% @contacts = Contact.where(:user_id => current_user.id).find(:all, :order => "id desc", :limit => 10) %>
+
+<h>Recent Corespondance</h4><br /><br />
+<% @contacts.each do |contact| %>
+<% @contactnote = ContactNote.where(:contact_id => contact.id ).find(:all, :order => "created_at desc", :limit => 1) %>
+<% unless @contactnote == nil %>
+    <p class="thumbnail span1" style="margin-left:0px; margin-right:10px;">
+      <img src="person.png" alt="">
+    </p>
+
+
+    <h3><%= link_to contact.fname+" "+contact.lname, contact %></h3><br />
+    <h6><%= contact.tel %></h6>
+    
+    <br />
+    
+    <% @contactnote.each do |contactnote| %>
+        <div class="well"><h6><%= contactnote.updated_at %></h6><%= truncate(contactnote.note, :length => 80, :separator => '[---MORE---]') %><%= link_to "more", contactnote %></div>
+    <% end %>
+
+  <div style="clear:both"></div>
+  <hr />
+<% end %>
+<% end %>
+
+<% end %>

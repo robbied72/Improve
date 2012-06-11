@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @contact_task.title %>
+</p>
+
+<p>
+  <b>Task details:</b>
+  <%= @contact_task.task_details %>
+</p>
+
+<p>
+  <b>Due:</b>
+  <%= @contact_task.due %>
+</p>
+
+<p>
+  <b>Complete:</b>
+  <%= @contact_task.complete %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @contact_task.status %>
+</p>
+
+<p>
+  <b>Contact:</b>
+  <%= @contact_task.contact_id %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @contact_task.user_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_contact_task_path(@contact_task) %> |
+<%= link_to 'Back', contact_tasks_path %>

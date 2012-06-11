@@ -1,0 +1,64 @@
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container">
+
+			<div id="user_nav" style="float:right; margin-top:20px;">
+
+				<% unless user_signed_in? %>
+					<%#= link_to_rpx "Sign in to social account", user_session_url %>
+					<%#= javascript_include_rpx(user_session_url) %>
+				<% end %>
+
+				<% if user_signed_in? %>
+					<p style="margin-top:-15px;">Signed in as <strong><%= current_user.email %></strong></p>
+					<div class="btn-group" style="float:right; margin-top:-5px;">
+						<a class="btn btn-success dropdown-toggle" data-toggle="dropdown" href="#">
+						<i class="icon-user icon-white"></i> My Account
+						<span class="caret"></span>
+						</a>
+
+						<ul id="menu1" class="dropdown-menu">
+							<li>
+								<% @myprofile = Profile.where(:user_id => current_user.id).find(:all) %>
+								<%= link_to 'My Profile', edit_profile_path(@myprofile) %>
+							</li>
+							<li>
+								<a href="#">
+								<i class="icon-cog"></i>
+								Settings
+								</a>
+							</li>
+						</ul>
+						<%= link_to "Sign out", destroy_user_session_path, :method => :delete, :class => "btn btn-danger", :style => "margin-left:10px;" %>
+					</div>
+				<% else %>
+					<%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>
+				<% end %>
+			</div>
+
+			<div  style="margin-top:20px;">
+				<a class="brand" href="#" style="margin-top:-20px;">
+				<%= image_tag "II.png" %>
+				</a>
+				<div class="nav-collapse">
+					<a  class="btn btn-success" href="/">
+					<i class="icon-home icon-white"></i> Home
+					</a>
+
+					<% if user_signed_in? %>
+						<%= link_to 'Add Contact', new_contact_path, :class => "btn btn-success" %>
+						<a  class="btn btn-success" href="projects/new">
+						<i class="icon-file icon-white"></i> Add Project
+						</a>
+						<a  class="btn btn-success" href="contact_tasks/new">
+						<i class="icon-ok-circle icon-white"></i> Add Task
+						</a>
+					<% end %>
+					<form class="navbar-search pull-right" action="" style="margin-right:20px;">
+					<input class="search-query span3" type="text" placeholder="Search" style="background-color:#fff;">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

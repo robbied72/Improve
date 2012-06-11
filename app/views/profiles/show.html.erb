@@ -1,52 +1,22 @@
-<p id="notice"><%= notice %></p>
+<div class="page-header">
+<h2>
+  <%= @profile.fname %> <%= @profile.lname %>
+</h2>
+</div>
 
-<p>
-  <b>Fname:</b>
-  <%= @profile.fname %>
-</p>
-
-<p>
-  <b>Lname:</b>
-  <%= @profile.lname %>
-</p>
-
-<p>
-  <b>Add1:</b>
-  <%= @profile.add1 %>
-</p>
-
-<p>
-  <b>Add2:</b>
-  <%= @profile.add2 %>
-</p>
-
-<p>
-  <b>Town:</b>
-  <%= @profile.town %>
-</p>
-
-<p>
-  <b>County:</b>
-  <%= @profile.county %>
-</p>
-
-<p>
-  <b>Postcode:</b>
+<address>
+  <%= @profile.add1 %><br />
+  <%= @profile.add2 %><br />
+  <%= @profile.town %><br />
+  <%= @profile.county %><br />
   <%= @profile.postcode %>
-</p>
+</address>
 
+<% unless @profile.mob == "" %>
 <p>
-  <b>Tel:</b>
-  <%= @profile.tel %>
-</p>
-
-<p>
-  <b>Mob:</b>
+  <abbr title="Phone">P:</abbr>
   <%= @profile.mob %>
 </p>
+<% end %>
 
-<b>User ID:</b>
-  <%= @profile.user_id %>
-</p>
-
-<%= link_to 'Edit', edit_profile_path(@profile) %>
+<%= link_to 'Edit', edit_profile_path(@profile), :class => "btn btn-mini btn-primary" %>

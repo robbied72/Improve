@@ -1,0 +1,66 @@
+<script>
+$(function(){
+$('.picker').datepicker()
+});
+</script>
+
+<%= form_for(@contact_task) do |f| %>
+  <% if @contact_task.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@contact_task.errors.count, "error") %> prohibited this contact_task from being saved:</h2>
+
+      <ul>
+      <% @contact_task.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="form-horizontal">
+    <br />
+
+<div class="control-group">
+<label class="control-label" for="input01"><%= f.label :Title %></label>
+<div class="controls">
+<%= f.text_field :title, :class => "input-medium" %>
+</div>
+</div>
+
+<div class="control-group">
+<label class="control-label" for="input01"><%= f.label :Status %></label>
+<div class="controls">
+    <%= f.text_area :task_details, :style => "width:100%;", :rows => "7" %>
+</div>
+</div>
+
+<div class="control-group">
+<label class="control-label" for="input01"><%= f.label :Due %></label>
+<div class="controls">
+<%= f.text_field :due, :class => "picker" %>
+</div>
+</div>
+
+<div class="control-group">
+<label class="control-label" for="input01"><%= f.label :Complete %></label>
+<div class="controls">
+<%= f.check_box :complete, :class => "input-medium" %>
+</div>
+</div>
+
+<div class="control-group">
+<label class="control-label" for="input01"><%= f.label :Status %></label>
+<div class="controls">
+<%= f.select(:status, ContactTask::STATUS_TYPES, :prompt => true) %>
+</div>
+
+    <%= f.hidden_field :contact_id, :value => (params[:id]) %>
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+
+<div class="form-actions">
+<%= f.submit :class => "btn btn-primary" %>
+</div>
+
+</div>  
+</div>
+<% end %>

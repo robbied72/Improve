@@ -1,0 +1,2 @@
+module ContactTasksHelper
+end

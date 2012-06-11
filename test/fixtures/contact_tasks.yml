@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  task_details: MyText
+  due: 2012-06-05 19:58:01
+  complete: false
+  status: MyString
+  contact_id: 1
+  user_id: 1
+
+two:
+  title: MyString
+  task_details: MyText
+  due: 2012-06-05 19:58:01
+  complete: false
+  status: MyString
+  contact_id: 1
+  user_id: 1

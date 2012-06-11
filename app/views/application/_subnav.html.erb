@@ -1,0 +1,48 @@
+<h2>Navigation</h2>
+<ul class="nav nav-list">
+	<li<% if  controller_name == "home" %> class="active"<% end %>>
+		<a href="/">
+		<i class="icon-white icon-list-alt"></i>
+		Recent Activity
+		</a>
+	</li>
+	<% if user_signed_in? %>
+	<li<% if  controller_name == "contacts" %> class="active"<% end %>>
+		<a href="/contacts/">
+		<i class="icon-user"></i>
+		Contacts
+		</a>
+	</li>
+	<li>
+		<a href="#">
+		<i class="icon-file"></i>
+		Projects
+		</a>
+	</li>
+	<li<% if  controller_name == "contact_tasks" %> class="active"<% end %>>
+		<a href="/contact_tasks/">
+		<i class="icon-ok-circle"></i>
+		Tasks
+		</a>
+	</li>
+	<li class="nav-header">My Settings</li>
+		<li<% if  controller_name == "profiles" %> class="active"<% end %>>
+			<a href="#">	
+			<%= link_to 'My Profile', edit_profile_path(@myprofile) %>
+			</a>
+		</li>
+	<li>
+		<a href="#">
+		<i class="icon-cog"></i>
+		Settings
+		</a>
+		</li>
+		<li class="divider"></li>
+	<% end %>
+	<li>
+		<a data-toggle="modal" href="#myModal<%= controller_name %>">
+		<i class="icon-flag"></i>
+		Help
+		</a>
+	</li>
+</ul>

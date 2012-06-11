@@ -1,0 +1,34 @@
+<div class="page-header">
+	<h1>
+		Recent Activity
+		<small>Below is your latest activity</small>
+	</h1>
+</div>
+<% if user_signed_in? %>
+<% @contacts = Contact.where(:user_id => current_user.id).find(:all, :order => "id desc", :limit => 10) %>
+<h4>Recent Contacts</h4><br />
+<% @contacts.each do |contact| %>
+    <p class="thumbnail span1" style="margin-left:0px; margin-right:10px;">
+      <img src="person.png" alt="">
+    </p>
+<% @contactnote = ContactNote.where(:contact_id => contact.id) %>
+    <h2><%= contact.fname %> <%= contact.lname %></h2>
+    <p><strong><%= contact.company %></strong></p>
+    <p><%= contact.tel %></p>
+    
+    <p><%= link_to 'Show Full Details', contact, :class => "btn btn-mini btn-primary" %> <%= link_to 'New Contact note', new_contact_note_path(:id => contact.id), :class => "btn btn-mini btn-primary" %> <%= link_to 'New Contact Task', new_contact_task_path(:id => contact.id), :class => "btn btn-mini btn-primary" %>
+</p>
+  <br />
+
+<% @contactnote = ContactNote.where(:contact_id => contact.id) %>
+  <% if @contactnote %>
+  <h4>Recent Notes</h4><br />
+  <% @contactnote.each do |contact_note| %>
+  <div class="well">
+  	<h6><%= contact_note.created_at %></h6><br /><%= contact_note.note %>
+  </div>
+  <% end %>
+  <% end %>
+<% end %>
+
+<% end %>

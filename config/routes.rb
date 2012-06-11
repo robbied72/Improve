@@ -1,5 +1,13 @@
 Auth::Application.routes.draw do
+  resources :contact_tasks
+
+  resources :contact_notes
+
+  resources :contacts
+
   get "home/index"
+
+  devise_for :users
 
   devise_for :users, :controllers => { :registrations => "registrations" }
 

@@ -1,33 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Auth</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
+<title>Improve Online</title>
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+<![endif]-->
+<%= stylesheet_link_tag    "application", :media => "all" %>
+<%= javascript_include_tag "application" %>
+<%= csrf_meta_tags %>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<div id="user_nav" style="float:right;">
-
-	<% unless user_signed_in? %>
-	<%#= link_to_rpx "Sign in to social account", user_session_url %>
-	<%#= javascript_include_rpx(user_session_url) %>
-	<% end %>
-  <% if user_signed_in? %>
-  <%   	@myprofile = Profile.where(:user_id => current_user.id).find(:all) %>
-  <%= link_to 'My Profile', edit_profile_path(@myprofile) %><br />
-  <br />
-    Signed in as <%= current_user.email %>. Not you?
-    <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-  <% else %>
-    <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>
-  <% end %>
-</div>
-<br />
-
-<%= link_to "home", "/" %>
-
-<%= yield %>
-
+	<div class="container">
+		<div class="row">
+			<div class="span12">
+				<%= render "nav" %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span2">
+				<%= render "subnav" %>
+			</div>
+			<div class="span8">
+				<div class="well" style="min-height:600px; background-color:#fff;">
+					<% flash.each do |name, msg| %>
+						<div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+							<a class="close" data-dismiss="alert">×</a>
+							<%= msg %>
+						</div>
+					<% end %>
+				<%= yield %>
+				</div>
+			</div>
+			<div class="span2">
+				<%= render "tasks" %>
+			</div>
+		</div>
+	</div>
+		<%= render "helpmodals" %>
 </body>
 </html>

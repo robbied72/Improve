@@ -1,0 +1,57 @@
+<div class="page-header">
+<h2>
+  <%= @contact.fname %> <%= @contact.lname %>
+</h2>
+</div>
+
+<address>
+  <strong><%= @contact.company %></strong><br />
+  <%= @contact.add1 %><br />
+  <%= @contact.add2 %><br />
+  <%= @contact.town %><br />
+  <%= @contact.county %><br />
+  <%= @contact.postcode %>
+</address>
+
+<% unless @contact.tel == "" %>
+<p>
+  <abbr title="Phone">P:</abbr>
+  <%= @contact.tel %>
+</p>
+<% end %>
+<% unless @contact.mob == "" %>
+<p>
+  <abbr title="Mobile">M:</abbr>
+  <%= @contact.mob %>
+</p>
+<% end %>
+<% unless @contact.email == "" %>
+<p>
+  <abbr title="Email Address">E:</abbr>
+  <%= mail_to @contact.email %>
+</p>
+<% end %>
+
+
+<%= link_to 'Edit', edit_contact_path(@contact), :class => "btn btn-mini btn-primary" %>
+<%= link_to 'Back To List', contacts_path, :class => "btn btn-mini btn-primary" %>
+<%= link_to 'New Contact Note', new_contact_note_path(:id => @contact.id), :class => "btn btn-mini btn-primary" %>
+<%= link_to 'New Contact Task', new_contact_task_path(:id => @contact.id), :class => "btn btn-mini btn-primary" %>
+<br />
+<br />
+<% @contactnote = ContactNote.where(:contact_id => @contact.id).find(:all, :order => "updated_at desc") %>
+
+  <% @contactnote.each do |contact_note| %>
+  <div class="well">
+    <h6></i>NOTE Created: <%= contact_note.created_at %></h6><br /><%= contact_note.note %><br /><br />
+        <p><%= link_to 'Destroy Note', contact_note, confirm: 'Are you sure?', method: :delete, :class => "btn btn-mini btn-danger" %></p>
+  </div>
+  <% end %>
+
+  <% @contacttask = ContactTask.where(:contact_id => @contact.id).find(:all, :order => "due desc") %>
+  <% @contacttask.each do |contact_task| %>
+  <% @currentcontacttask = ContactTask.where(:id => contact_task.id).find(:all, :order => "due desc") %>
+  <div class="well" style="background-color:#fff;">
+    <h6></i>Task Created: <%= contact_task.created_at %></h6><br /><%= contact_task.title %><br /><br /><%= contact_task.task_details %><br /><br /><%= link_to 'Edit', edit_contact_task_path(@currentcontacttask), :class => "btn btn-mini btn-primary" %>
+  </div>
+  <% end %>

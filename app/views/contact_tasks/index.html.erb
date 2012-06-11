@@ -1,0 +1,28 @@
+<h1>My Tasks</h1>
+<br />
+<table class="table table-condensed">
+  <tr>
+    <th>Title</th>
+    <th>Due</th>
+    <th>Complete</th>
+    <th>Status</th>
+    <th>Contact</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @contact_tasks.each do |contact_task| %>
+
+  <tr>
+    <td><%= contact_task.title %></td>
+    <td><%= contact_task.due %></td>
+    <td><%= contact_task.complete %></td>
+    <td><%= contact_task.status %></td>
+    <td><%= contact_task.contact_id %></td>
+    <td><%= link_to 'Show', contact_task, :class => "btn btn-mini btn-primary" %></td>
+    <td><%= link_to 'Edit', edit_contact_task_path(contact_task), :class => "btn btn-mini btn-primary" %></td>
+    <td><%= link_to 'Destroy', contact_task, confirm: 'Are you sure?', method: :delete , :class => "btn btn-mini btn-danger"%></td>
+  </tr>
+<% end %>
+</table>

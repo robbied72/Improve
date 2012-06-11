@@ -11,7 +11,44 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120531082318) do
+ActiveRecord::Schema.define(:version => 20120605185801) do
+
+  create_table "contact_notes", :force => true do |t|
+    t.text     "note"
+    t.integer  "contact_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "user_id"
+  end
+
+  create_table "contact_tasks", :force => true do |t|
+    t.string   "title"
+    t.text     "task_details"
+    t.datetime "due"
+    t.boolean  "complete"
+    t.string   "status"
+    t.integer  "contact_id"
+    t.integer  "user_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "contacts", :force => true do |t|
+    t.string   "fname"
+    t.string   "lname"
+    t.string   "company"
+    t.string   "add1"
+    t.string   "add2"
+    t.string   "town"
+    t.string   "county"
+    t.string   "postcode"
+    t.string   "tel"
+    t.string   "mob"
+    t.string   "email"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "profiles", :force => true do |t|
     t.string   "fname"

@@ -1,0 +1,12 @@
+<% if user_signed_in? %>
+<% @contacttask = ContactTask.where(:user_id => current_user.id).limit(3) %>
+	<% if @contacttask %>
+		<h4>Recent Tasks</h4><br />
+		<% @contacttask.each do |contact_task| %>
+		  	<div class="well" style="background-color:#fff;">
+			  <h6><%= contact_task.title %></h6>
+			  <h6><%= contact_task.due %></h6><br /><%= truncate(contact_task.task_details, :length => 80, :separator => '[---MORE---]') %>
+			</div>
+		<% end %>
+	<% end %>
+<% end %>

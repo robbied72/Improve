@@ -1,4 +1,16 @@
 class ProfilesController < ApplicationController
+
+  before_filter :find_profile
+  before_filter :check_if_authorized 
+
+  def find_profile
+    @profile = Profile.find(params[:id])
+  end
+
+  def check_if_authorized
+    render :status => 404 and return unless current_user.id == @profile.user_id
+  end
+
   # GET /profiles
   # GET /profiles.json
   def index
